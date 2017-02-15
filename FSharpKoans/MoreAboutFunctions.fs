@@ -10,17 +10,17 @@ open FSharpKoans.Core
 //---------------------------------------------------------------
 [<Koan(Sort = 13)>]
 module ``more about functions`` =
-    
+
     [<Koan>]
     let DefiningLambdas() =
-        
+
         let colors = ["maize"; "blue"]
 
-        let echo = 
+        let echo =
             colors
             |> List.map (fun x -> x + " " + x)
 
-        AssertEquality echo __
+        AssertEquality echo ["maize maize"; "blue blue"]
 
         (* The fun keyword allows you to create a function inline without giving
            it a name. These functions are known as anonymous functions, lambdas,
@@ -28,7 +28,7 @@ module ``more about functions`` =
 
     [<Koan>]
     let FunctionsThatReturnFunctions() =
-        (* A neat functional programming trick is to create functions that 
+        (* A neat functional programming trick is to create functions that
            return other functions. This leads to some interesting behaviors. *)
         let add x =
             (fun y -> x + y)
@@ -51,7 +51,7 @@ module ``more about functions`` =
     let AutomaticCurrying() =
         (* The above technique is common enough that F# actually supports this
            by default. In other words, functions are automatically curried. *)
-        let add x y = 
+        let add x y =
             x + y
 
         let addSeven = add 7
@@ -63,22 +63,22 @@ module ``more about functions`` =
 
     [<Koan>]
     let NonCurriedFunctions() =
-        (* You should stick to the auto-curried function syntax most of the 
+        (* You should stick to the auto-curried function syntax most of the
            time. However, you can also write functions in an uncurried form to
-           make them easier to use from languages like C# where currying is not 
+           make them easier to use from languages like C# where currying is not
            as commonly used. *)
 
         let add(x, y) =
             x + y
 
-        (* NOTE: "add 5" will not compile now. You have to pass both arguments 
+        (* NOTE: "add 5" will not compile now. You have to pass both arguments
                  at once *)
 
         let result = add(5, 40)
 
         AssertEquality result __
 
-        (* THINK ABOUT IT: You learned earlier that functions with multiple 
+        (* THINK ABOUT IT: You learned earlier that functions with multiple
                            return values are really just functions that return
                            tuples. Do functions defined in the uncurried form
                            really accept more than one argument at a time? *)
